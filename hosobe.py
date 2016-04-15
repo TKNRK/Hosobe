@@ -1,7 +1,10 @@
 import numpy as np
 
-n = 5
+n = 10
 d = np.random.randn(n**2).reshape(n,n)
+for i in np.arange(n):
+	for j in np.arange(i):
+		d[i][j] = d[j][i]
 
 def culA():
 	a = np.zeros(n**2).reshape(n,n)
@@ -14,16 +17,18 @@ def culA():
 	for i in np.arange(n):
 		da2 += dr2[i]
 	da2 = da2 / n**2
+	dr2 = dr2 / 2
+	dc2 = dc2 / 2
 
 	for i in np.arange(n):
 		for j in np.arange(n):
-			a[i][j] = ((dc2[i]+dr2[j])/2 - da2 + d[i][j]*2)/2
+			a[i][j] = ((dc2[i]+dr2[j]) - da2 - d[i][j]*2)/2
 
 	return a
 
 a = culA()
 
-L,X = np.linalg.eig(a)
+L,X = np.linalg.eigh(a)
 L.sort()
 L = L[::-1]
 Ln = np.sqrt(np.diag(L))
