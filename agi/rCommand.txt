@@ -4,6 +4,7 @@ library(igraph)
 g <- graph.full(5) %du% graph.full(5) %du% graph.full(5)
 g <- add.edges(g, c(1, 6, 1, 11, 6, 11)) 
 d <- shortest.paths(g)
+adj <- get.edgelist(g)
 n <- ncol(d)
 
 a <- matrix(ncol = n, nrow=n)
@@ -22,4 +23,5 @@ eVecs <- y$vectors
 p <- eVecs %*% diag(eVals)
 
 write.table(eVals,"eigVals.csv",quote=F,row.names=F,col.names=F,append=F)
+write.table(adj,"adjacency.csv",quote=F,row.names=F,col.names=F,append=F,sep=",")
 write.table(p,"mdSpace.csv",quote=F,row.names=F,col.names=F,append=F,sep=",")

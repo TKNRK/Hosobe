@@ -5,7 +5,7 @@ import scala.math.{abs,min,floor,sqrt,pow}
 import scala.io.Source
 import javafx.collections.{ObservableList, FXCollections}
 
-class MDS_Plane (val url1:String,val url2:String){
+class MDS_Plane (val url1:String,val url2:String,val url3:String){
   def sList2dList(s:List[String],d:List[List[Double]]):List[List[Double]]={
     s match {
       case Nil => List(Nil)
@@ -13,11 +13,21 @@ class MDS_Plane (val url1:String,val url2:String){
       case (e :: rst) => sList2dList(rst,d:+e.split(",").toList.map(x=>x.toDouble))
     }
   }
+  def sList2iList(s:List[String],d:List[List[Int]]):List[List[Int]]={
+    s match {
+      case Nil => List(Nil)
+      case (e :: Nil) => d :+ e.split(",").toList.map(x=>x.toInt)
+      case (e :: rst) => sList2iList(rst,d:+e.split(",").toList.map(x=>x.toInt))
+    }
+  }
 
-	var p:List[List[Double]] = sList2dList(Source.fromFile(url1).getLines.toList,Nil)
-  var eigvals:List[Double] = Source.fromFile(url2).getLines.toList.map(x=>x.toDouble)
+	val p:List[List[Double]] = sList2dList(Source.fromFile(url1).getLines.toList,Nil)
+  val adjacency:List[List[Int]] = sList2iList(Source.fromFile(url2).getLines.toList,Nil)
+  val eigvals:List[Double] = Source.fromFile(url3).getLines.toList.map(x=>x.toDouble)
   var Xs:List[Double] = List()
   var Ys:List[Double] = List()
+  var boundingX:Double = 0
+  var boundingY:Double = 0
 		
   val n:Int = p.length
   def countP(lst:List[Double], ans:Int):Int={
@@ -34,7 +44,7 @@ class MDS_Plane (val url1:String,val url2:String){
       case lst::rst => takeD(rst,ans :+ lst.take(d),d)
     }
   }
-  val P:List[List[Double]] = takeD(p,List(Nil),d)
+  val points:List[List[Double]] = takeD(p,Nil,d)
   val ePos = eigvals.take(d)
   var f1:List[Double] = List()
   var f2:List[Double] = List()
@@ -53,21 +63,26 @@ class MDS_Plane (val url1:String,val url2:String){
 
   def dot(lst1:List[Double], lst2:List[Double], sum:Double):Double={
     lst1 match {
-      case Nil => Math.sqrt(sum)
+      case Nil => sum
       case e1::rst1 => lst2 match{
         case Nil => Math.sqrt(sum)
         case e2::rst2 => dot(rst1,rst2, sum + e1*e2)
       }
     }
   }
-  var e1 = f1.map(x => x/dot(f1,f1,0))
-  var e2 = f2.map(x => x/dot(f2,f2,0))
+  var e1 = f1.map(x => x/Math.sqrt(dot(f1,f1,0)))
+  var e2 = f2.map(x => x/Math.sqrt(dot(f2,f2,0)))
   var temp1 = e1
   var temp2 = e2
 
   for(i <- 0 to n-1){
-    Xs = Xs :+ dot(p(i),e1,0)
-    Ys = Ys :+ dot(p(i),e2,0)
+    Xs = Xs :+ dot(points(i),e1,0)
+    Ys = Ys :+ dot(points(i),e2,0)
+  }
+
+  def boundingBox():Unit={
+    this.boundingX = 2 * List(abs(Xs.min),Xs.max).max
+    this.boundingY = 2 * List(abs(Ys.min),Ys.max).max
   }
 
   // 射影平面の更新

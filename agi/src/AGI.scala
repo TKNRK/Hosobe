@@ -25,28 +25,51 @@ case class Node  (shape:Ellipse) extends TDShape
 
 object AGI extends JFXApp {
 
-  val h = 600
-  val w = 400
+  val h = 400
+  val w = 600
 
-  var base = new MDS_Plane("mdSpace.csv","eigVals.csv")
+  var base = new MDS_Plane("mdSpace.csv","adjacency.csv","eigVals.csv")
 
-  def projection(p:Double):Double={
-    return p * 10
-  }
-  //
-  for(i <- 1 to base.n){
-    var n = new Ellipse {
-      id = String.valueOf(i)
-      centerX = projection(base.Xs.apply(i-1))
-      centerY = projection(base.Ys.apply(i-1))
-      radiusX = 10
-      radiusY = 10
-      stroke = Color.Black; fill = Color.Black
+  def projection(p:Double,xy:Boolean):Double={
+    base.boundingBox()
+    if(xy){
+      return w*(p + base.boundingX/2)/base.boundingX
+    } else {
+      return (h-100)*(base.boundingY/2 - p)/base.boundingY
     }
   }
 
-  // 平面の描画
   var shapes: MutableList[TDShape] = MutableList()
+  val drawingPane = new Pane { }
+  
+  // node drawing
+  for(i <- 1 to base.n){
+    var e = new Ellipse {
+      id = String.valueOf(i)
+      centerX = projection(base.Xs(i-1), true)
+      centerY = projection(base.Ys(i-1),false)
+      radiusX = 10
+      radiusY = 10
+      stroke = Color.Black; fill = Color.Black
+      val ith = String.valueOf(i-1)
+    }
+    drawingPane.content += e
+    shapes += Node(e)
+  }
+  // edge drawing
+  for(i <- base.adjacency){
+    var l = new Line {
+      id = String.valueOf(i)
+      startX = projection(base.Xs(i(0)-1), true)
+      endX = projection(base.Xs(i(1)-1), true)
+      startY = projection(base.Ys(i(0)-1), false)
+      endY = projection(base.Ys(i(1)-1), false)
+    }
+    drawingPane.content += l
+    shapes += Link(l)
+  }
+
+  // 平面の描画
 
   type MouseHandler = MouseEvent => Unit
   object mouseAction {
@@ -123,8 +146,6 @@ object AGI extends JFXApp {
   mouseAction.pressHandlers   += (("Select", SelectControl.onPress))
   mouseAction.dragHandlers    += (("Select", SelectControl.onDrag))
   mouseAction.releaseHandlers += (("Select", SelectControl.onReleased))
-
-  val drawingPane = new Pane { }
 
   val shapeGroup = new ToggleGroup()
 
