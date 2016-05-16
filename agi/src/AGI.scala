@@ -28,7 +28,7 @@ object AGI extends JFXApp {
   val h = 400
   val w = 600
 
-  var base = new MDS_Plane("mdSpace.csv","adjacency.csv","eigVals.csv")
+  var base = new MDS_Plane("mdSpace.csv","edgeList.csv","eigVals.csv")
 
   def projection(p:Double,xy:Boolean):Double={
     base.boundingBox()
