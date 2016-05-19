@@ -4,6 +4,8 @@ import scala.util.Random
 import scala.math.{abs,min,floor,sqrt,pow}
 import scala.io.Source
 import javafx.collections.{ObservableList, FXCollections}
+import scala.collection.mutable.{Buffer, ListBuffer}
+import scalafx.beans.property.StringProperty
 
 class MDS_Plane (val url1:String,val url2:String,val url3:String){
   def sList2dList(s:List[String],d:List[List[Double]]):List[List[Double]]={
@@ -24,8 +26,8 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
 	val p:List[List[Double]] = sList2dList(Source.fromFile(url1).getLines.toList,Nil)
   val adjacency:List[List[Int]] = sList2iList(Source.fromFile(url2).getLines.toList,Nil)
   val eigvals:List[Double] = Source.fromFile(url3).getLines.toList.map(x=>x.toDouble)
-  var Xs:List[Double] = List()
-  var Ys:List[Double] = List()
+  var Xs:ListBuffer[Double] = ListBuffer()
+  var Ys:Buffer[Double] = Buffer()
   var boundingX:Double = 0
   var boundingY:Double = 0
 		
@@ -51,11 +53,11 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
   var flag = true
   for(i <- 0 to d-1){
     if(flag){
-      f1 = f1 :+ ePos(i)
+      f1 = f1 :+ sqrt(ePos(i))
       f2 = f2 :+ 0d
       flag = false
     } else {
-      f2 = f2 :+ ePos(i)
+      f2 = f2 :+ sqrt(ePos(i))
       f1 = f1 :+ 0d
       flag = true
     }
@@ -131,5 +133,15 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
     return (a1*temp1 + b1*temp2 + c1*p, a2*temp1 + b2*temp2 + c2*p)
   }*/
 
-  def update(x2:Double, y2:Double):Unit={}
+  def update(x2:Double, y2:Double, i:String):Unit={
+    val ith = i.toInt
+    Xs(ith) = x2
+    Ys(ith) = y2
+  }
+
+  /*def print():Unit={
+    for(i <- 0 to n-1){
+      System.out.println(Xs(i))
+    }
+  }*/
 }

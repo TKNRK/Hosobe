@@ -28,7 +28,7 @@ object AGI extends JFXApp {
   val h = 400
   val w = 600
 
-  var base = new MDS_Plane("mdSpace.csv","edgeList.csv","eigVals.csv")
+  var base = new MDS_Plane("mdSpace.csv","adjacency.csv","eigVals.csv")
 
   def projection(p:Double,xy:Boolean):Double={
     base.boundingBox()
@@ -39,24 +39,33 @@ object AGI extends JFXApp {
     }
   }
 
-  var shapes: MutableList[TDShape] = MutableList()
+  def deProjection(p:Double,xy:Boolean):Double={
+    base.boundingBox()
+    if(xy){
+      return base.boundingX*(p - w/2)/w
+    } else {
+      return base.boundingY*(p - (h -100)/2)/(100-h)
+    }
+  }
+
+  var shapes: Buffer[TDShape] = Buffer()
   val drawingPane = new Pane { }
   
   // node drawing
   for(i <- 1 to base.n){
     var e = new Ellipse {
-      id = String.valueOf(i)
+      id = String.valueOf(i-1)
       centerX = projection(base.Xs(i-1), true)
       centerY = projection(base.Ys(i-1),false)
-      radiusX = 10
-      radiusY = 10
+      radiusX = 5
+      radiusY = 5
       stroke = Color.Black; fill = Color.Black
-      val ith = String.valueOf(i-1)
     }
     drawingPane.content += e
     shapes += Node(e)
   }
   // edge drawing
+  def edgeDraw():Unit={
   for(i <- base.adjacency){
     var l = new Line {
       id = String.valueOf(i)
@@ -68,6 +77,9 @@ object AGI extends JFXApp {
     drawingPane.content += l
     shapes += Link(l)
   }
+  }
+
+  edgeDraw()
 
   // 平面の描画
 
@@ -90,6 +102,8 @@ object AGI extends JFXApp {
     }
   }
 
+  val pNum = base.adjacency.length
+
   object SelectControl { // 選択ツールに関わるデータ構造と処理
     var selection: TDShape = TDNoShape()
     var p0 = new Point2D(0,0)
@@ -100,7 +114,7 @@ object AGI extends JFXApp {
       // 影を消す操作
       selection match {
         case Node(e)   => e.effect = null
-        case Link(l)      => l.effect = null
+        case Link(l)      => ()
         case TDNoShape()    => ()
       }
 
@@ -117,7 +131,7 @@ object AGI extends JFXApp {
       }
       selection match {
         case Node(e) => e.effect = new DropShadow(10, Color.Blue); p1 = new Point2D(e.centerX(), e.centerY())
-        case Link(l) => l.effect = new DropShadow(10, Color.Blue); p1 = new Point2D(l.startX(),l.startY()); p2 = new Point2D(l.endX(),l.endY())
+        case Link(l) => ()
         case TDNoShape() => ()
       }  
       p0 = new Point2D(ev.x, ev.y)
@@ -127,17 +141,18 @@ object AGI extends JFXApp {
       selection match {
         case Node(e) => 
           e.centerX = p1.x + ev.x - p0.x ; e.centerY = p1.y + ev.y - p0.y
-
-        case Link(l) => 
-          l.startX = p1.x + ev.x - p0.x ; l.startY = p1.y + ev.y - p0.y
-          l.endX   = p2.x + ev.x - p0.x ; l.endY   = p2.y + ev.y - p0.y
+          base.update(deProjection(ev.x,true),deProjection(ev.y,false),e.id.apply()) 
+          shapes.trimEnd(pNum) ; drawingPane.content.trimEnd(pNum) ; edgeDraw()
+        case Link(l) => ()
         case TDNoShape() => ()
       }
     }
 
     def onReleased(ev: MouseEvent) {
       selection match {
-        case Node(e) => base.update(ev.x,ev.y)
+        case Node(e) => base.update(deProjection(ev.x,true),deProjection(ev.y,false),e.id.apply()) 
+          shapes.trimEnd(pNum) ; drawingPane.content.trimEnd(pNum) ; edgeDraw()
+        case _ => ()
       }
     }
 
