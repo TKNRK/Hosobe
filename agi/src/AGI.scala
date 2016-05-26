@@ -52,33 +52,36 @@ object AGI extends JFXApp {
   val drawingPane = new Pane { }
   
   // node drawing
-  for(i <- 1 to base.n){
-    var e = new Ellipse {
-      id = String.valueOf(i-1)
-      centerX = projection(base.Xs(i-1), true)
-      centerY = projection(base.Ys(i-1),false)
-      radiusX = 5
-      radiusY = 5
-      stroke = Color.Black; fill = Color.Black
+  def nodeDraw():Unit={
+    for(i <- 1 to base.n){
+      var e = new Ellipse {
+        id = String.valueOf(i-1)
+        centerX = projection(base.Xs(i-1), true)
+        centerY = projection(base.Ys(i-1),false)
+        radiusX = 5
+        radiusY = 5
+        stroke = Color.Black; fill = Color.Black
+      }
+      drawingPane.content += e
+      shapes += Node(e)
     }
-    drawingPane.content += e
-    shapes += Node(e)
   }
   // edge drawing
   def edgeDraw():Unit={
-  for(i <- base.adjacency){
-    var l = new Line {
-      id = String.valueOf(i)
-      startX = projection(base.Xs(i(0)-1), true)
-      endX = projection(base.Xs(i(1)-1), true)
-      startY = projection(base.Ys(i(0)-1), false)
-      endY = projection(base.Ys(i(1)-1), false)
+    for(i <- base.adjacency){
+      var l = new Line {
+        id = String.valueOf(i)
+        startX = projection(base.Xs(i(0)-1), true)
+        endX = projection(base.Xs(i(1)-1), true)
+        startY = projection(base.Ys(i(0)-1), false)
+        endY = projection(base.Ys(i(1)-1), false)
+      }
+      drawingPane.content += l
+      shapes += Link(l)
     }
-    drawingPane.content += l
-    shapes += Link(l)
-  }
   }
 
+  nodeDraw()
   edgeDraw()
 
   // 平面の描画
@@ -135,14 +138,24 @@ object AGI extends JFXApp {
         case TDNoShape() => ()
       }  
       p0 = new Point2D(ev.x, ev.y)
+
+      // インデックス生成
     }    
+
+    def updateN(s:TDShape, i:Int):Unit={
+      s match{
+        case Node(e) => e.centerX = projection(base.Xs(i), true) ; e.centerY = projection(base.Ys(i),false)
+        case _ => ()
+      }
+    }
 
     def onDrag(ev: MouseEvent) {
       selection match {
         case Node(e) => 
           e.centerX = p1.x + ev.x - p0.x ; e.centerY = p1.y + ev.y - p0.y
           base.update(deProjection(ev.x,true),deProjection(ev.y,false),e.id.apply()) 
-          shapes.trimEnd(pNum) ; drawingPane.content.trimEnd(pNum) ; edgeDraw()
+          for(i <- 0 to base.n - 1){updateN(shapes(i), i)}
+          //shapes.trimEnd(pNum) ; drawingPane.content.trimEnd(pNum) ; edgeDraw()
         case Link(l) => ()
         case TDNoShape() => ()
       }
@@ -151,7 +164,7 @@ object AGI extends JFXApp {
     def onReleased(ev: MouseEvent) {
       selection match {
         case Node(e) => base.update(deProjection(ev.x,true),deProjection(ev.y,false),e.id.apply()) 
-          shapes.trimEnd(pNum) ; drawingPane.content.trimEnd(pNum) ; edgeDraw()
+          shapes.trimEnd(pNum+base.n) ; drawingPane.content.trimEnd(pNum+base.n) ; nodeDraw() ; edgeDraw()
         case _ => ()
       }
     }

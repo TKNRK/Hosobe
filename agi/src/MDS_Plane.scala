@@ -1,6 +1,7 @@
 package AGI
 
 import scala.util.Random
+import scala.util.control.Breaks
 import scala.math.{abs,min,floor,sqrt,pow}
 import scala.io.Source
 import javafx.collections.{ObservableList, FXCollections}
@@ -27,7 +28,7 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
   val adjacency:List[List[Int]] = sList2iList(Source.fromFile(url2).getLines.toList,Nil)
   val eigvals:List[Double] = Source.fromFile(url3).getLines.toList.map(x=>x.toDouble)
   var Xs:ListBuffer[Double] = ListBuffer()
-  var Ys:Buffer[Double] = Buffer()
+  var Ys:ListBuffer[Double] = ListBuffer()
   var boundingX:Double = 0
   var boundingY:Double = 0
 		
@@ -66,9 +67,9 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
   def dot(lst1:List[Double], lst2:List[Double], sum:Double):Double={
     lst1 match {
       case Nil => sum
-      case e1::rst1 => lst2 match{
+      case elm1::rst1 => lst2 match{
         case Nil => Math.sqrt(sum)
-        case e2::rst2 => dot(rst1,rst2, sum + e1*e2)
+        case elm2::rst2 => dot(rst1,rst2, sum + elm1*elm2)
       }
     }
   }
@@ -87,10 +88,12 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
 
   def update(x2:Double, y2:Double, i:String):Unit={
     val ith = i.toInt
-    Xs(ith) = x2
-    Ys(ith) = y2
-    //val e = this.agi(ith,x2,y2)
-    //e1 = e._1 ; e2 = e._2
+    val e = agi(ith,x2,y2)
+    e1 = e._1 ; e2 = e._2
+    for(i <- 0 to n-1){
+      Xs(i) = dot(points(i),e1,0)
+      Ys(i) = dot(points(i),e2,0)
+    }
     boundingBox()
   }
 
@@ -101,11 +104,11 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
   }*/
 
   // 射影平面の更新(newton法)
-  def agi(i:int, x2:int, y2:int):(e1,e2)={
+  def agi(i:Int, x2:Double, y2:Double):(List[Double],List[Double])={
     val p = P(i)
     val x = Xs(i)
     val y = Ys(i)
-    val p2 = dot(p,p)
+    val p2 = dot(p,p,0)
     val m1 = (x*x*y*y)/((p2-y*y)*(p2-y*y)) - (p2 - x*x)
     val m2 = x*y / (p2 - y*y)
 
@@ -189,7 +192,13 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
     }
 
     // 制約解消
-    newton2()    
+    val brk = new Breaks
+    brk.breakable{
+      for(count <- 1 to 10){
+        newton2()
+        if(branch()) brk.break
+      }
+    }    
     val b1 = cul_b1(a1)
     val b2 = cul_b2(a2)
     val c1 = cul_c1(a1,b1)
@@ -197,11 +206,10 @@ class MDS_Plane (val url1:String,val url2:String,val url3:String){
 
     def vec(a:Double,b:Double,c:Double):List[Double]={
       var v:List[Double] = Nil
-      for(i <- 0 to n-1){}
+      for(i <- 0 to d-1){ v = (a*e1(i) + b*e2(i) + c*p(i)) :: v }
       return v
     }
 
-    //return (vec(a1,b1,c1),vec(a1,b1,c1))
-    return (p,p)
+    return (vec(a1,b1,c1),vec(a1,b1,c1))
   }
 }
