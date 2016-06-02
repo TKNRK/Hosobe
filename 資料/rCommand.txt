@@ -1,0 +1,66 @@
+setwd("C:/Users/Riku/Dropbox (smartnova)/agi/csv")
+library(igraph)
+
+## example 1 ##
+g <- graph.full(5) %du% graph.full(5) %du% graph.full(5)
+g <- add.edges(g, c(1, 6, 1, 11, 6, 11)) 
+distance <- shortest.paths(g)
+eL <- get.edgelist(g)
+y <- cmdscale(distance, k=dim(distance)-1, eig=T)
+p <- y$points
+eVals <- y$eig
+write.table(eVals,"eigVals.csv",quote=F,row.names=F,col.names=F,append=F)
+write.table(eL,hedgeList.csv",quote=F,row.names=F,col.names=F,append=F,sep=",")
+write.table(p,"mdSpace.csv",quote=F,row.names=F,col.names=F,append=F,sep=",")
+###################################################################################
+g <- graph.full(5) %du% graph.full(5) %du% graph.full(5)
+g <- add.edges(g, c(1, 6, 1, 11, 6, 11)) 
+d <- shortest.paths(g)
+adj <- get.edgelist(g)
+n <- ncol(d)
+
+a <- matrix(ncol = n, nrow=n)
+dc2 = colSums(d^2) / n
+dr2 = rowSums(d^2) / n
+da2 = sum(dc2) / n
+for (i in 1:n) {
+for (j in 1:n) {
+a[i,j] = (dr2[i] + dc2[j] - da2 - d[i,j]^2) / 2
+}}
+
+y <- eigen(a)
+eVals <- y$values
+eVecs <- y$vectors
+
+p <- eVecs %*% diag(eVals)
+
+write.table(eVals,"eigVals.csv",quote=F,row.names=F,col.names=F,append=F)
+write.table(adj,"adjacency.csv",quote=F,row.names=F,col.names=F,append=F,sep=",")
+write.table(p,"mdSpace.csv",quote=F,row.names=F,col.names=F,append=F,sep=",")
+
+
+## example 2 ##
+
+g2 <- random.graph.game(10, p=0.5, direct=F)
+d2 <- shortest.paths(g2)
+adj2 <- get.edgelist(g2)
+n2 <- ncol(d2)
+
+a2 <- matrix(ncol = n2, nrow=n2)
+dc22 = colSums(d2^2) / n2
+dr22 = rowSums(d2^2) / n2
+da22 = sum(dc22) / n2
+for (i in 1:n2) {
+for (j in 1:n2) {
+a2[i,j] = (dr22[i] + dc22[j] - da22 - d2[i,j]^2) / 2
+}}
+
+y2 <- eigen(a2)
+eVals2 <- y2$values
+eVecs2 <- y2$vectors
+
+p2 <- eVecs2 %*% diag(eVals2)
+
+write.table(eVals2,"eigVals2.csv",quote=F,row.names=F,col.names=F,append=F)
+write.table(adj2,"adjacency2.csv",quote=F,row.names=F,col.names=F,append=F,sep=",")
+write.table(p2,"mdSpace2.csv",quote=F,row.names=F,col.names=F,append=F,sep=",")
