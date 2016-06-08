@@ -1,17 +1,18 @@
 import numpy as np
 import sympy as sp
-import scipy as cp
+from scipy import optimize as opt
 from matplotlib import pyplot as plt
-import DraggableCircle.py
+from sympy.utilities.lambdify import lambdify
+from sympy import Matrix
 
-###### initialize ############
+#  initialize
 
 edge = np.genfromtxt('csv/adjacency.csv', delimiter=",").astype(np.int64) 
 P = np.genfromtxt('csv/mdSpace.csv', delimiter=",") 
 n = len(P)
-L =np.genfromtxt('csv/eigVals.csv', delimiter=",") 
-L_pos = np.array([L[i] if L[i]>0 else 0 for i in range(n)])
-d = np.count_nonzero(L_pos)	# d ... the number of positive values
+L = np.genfromtxt('csv/eigVals.csv', delimiter=",")
+L_pos = np.array([L[i] if L[i] > 0 else 0 for i in range(n)])
+d = np.count_nonzero(L_pos)  #d ... the number of positive values
 Ln = np.sqrt(L_pos)
 
 f2 = np.array(Ln[0:d])
@@ -27,6 +28,34 @@ for i in np.arange(n):
     p0 = P[i,0:d]
     Xs = np.append(Xs,np.dot(p0,e1))
     Ys = np.append(Ys,np.dot(p0,e2))
+
+########## sympy #################
+a1,b1,c1,a2,b2,c2,t,s = sp.symbols('a1 b1 c1 a2 b2 c2 t s')   # variables
+x2_s,y2_s = sp.symbols('x2_s y2_s') # values
+P_i = sp.MatrixSymbol('P_i', d, 1)
+E1 = sp.MatrixSymbol('E1', d, 1)
+E2 = sp.MatrixSymbol('E2', d, 1)
+var = (x2_s,y2_s,P_i,E1,E2,a1,b1,c1,a2,b2,c2,t,s)
+
+_E1 = a1*sp.Matrix(E1) + b1*sp.Matrix(E2) + c1*sp.Matrix(P_i)
+_E2 = a2*sp.Matrix(E1) + b2*sp.Matrix(E2) + c2*sp.Matrix(P_i)
+R  = s*sp.Matrix(E1) + t*sp.Matrix(E2)
+
+f = Matrix([
+		_E1.dot(_E1) - 1,
+		_E2.dot(_E2) - 1,
+		_E1.dot(_E2),
+		R.dot(R) - 1,
+		_E1.dot(R) - sp.Matrix(E1).dot(R),
+		_E2.dot(R) - sp.Matrix(E2).dot(R),
+		sp.Matrix(P_i).dot(_E1) - x2_s,
+		sp.Matrix(P_i).dot(_E2) - y2_s
+		])
+
+func = Matrix.norm(f)
+lam_f = lambdify(var, func, 'numpy')
+
+arr = np.array([1,1,1,1,1,1,1,1])
 
 ######## Graph Drawing ########
 
@@ -111,69 +140,3 @@ for node in nodes:
 
 plt.axis('scaled')
 plt.show()
-
-
-
-######## upDating #############
-
-# newton
-# *args = (x,y,x2,y2,n,p,e1,e2)
-def agiN(*args):
-
-	# assign
-	x,y,x2,y2,p,e1,e2 = args
-
-	# Define return values
-	a1,b1,c1,a2,b2,c2,t,s = sp.symbols('a1 b1 c1 a2 b2 c2 t s')
-	var = np.array([a1,b1,c1,a2,b2,c2,t,s])
-	E1 = a1*e1 + b1*e2 + c1*p
-	E2 = a2*e1 + b2*e2 + c2*p
-	r  = s*e1 + t*e2
-
-	# functions
-	f = np.array([
-		np.dot(E1,E1) - 1,
-		np.dot(E2,E2) - 1,
-		np.dot(E1,E2),
-		np.dot(r,r) - 1,
-		np.dot(E1,r) - np.dot(e1,r),
-		np.dot(E2,r) - np.dot(e2,r),
-		np.dot(p,E1) - x2,
-		np.dot(p,E2) - y2
-	])
-	# Hessian
-	df = np.array([])
-	for i in range(len(var)):
-		for j in range(len(f)):
-			df = np.append(df, sp.diff(f[j],var[i]))
-	df = df.reshape(len(var),len(f))
-
-	# return the answer
-	return 0
-
-# BFGS
-def agiB(*args):
-	# assign
-	x,y,x2,y2,p,e1,e2 = args
-
-	# Define return values
-	a1,b1,c1,a2,b2,c2,t,s = sp.symbols('a1 b1 c1 a2 b2 c2 t s')
-	var = [a1,b1,c1,a2,b2,c2,t,s]
-	E1 = a1*e1 + b1*e2 + c1*p
-	E2 = a2*e1 + b2*e2 + c2*p
-	r  = s*e1 + t*e2
-
-	# functions
-	f = np.array([
-		np.dot(E1,E1) - 1,
-		np.dot(E2,E2) - 1,
-		np.dot(E1,E2),
-		np.dot(r,r) - 1,
-		np.dot(E1,r) - np.dot(e1,r),
-		np.dot(E2,r) - np.dot(e2,r),
-		np.dot(p,E1) - x2,
-		np.dot(p,E2) - y2
-	])
-
-	func = np.dot(f,f)
-	cp.minimize(func,var(0),method='L-BFGS-B',maxiter=5)
