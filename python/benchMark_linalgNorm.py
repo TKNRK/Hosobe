@@ -1,34 +1,23 @@
 import numpy as np
 import sympy as sp
-from scipy import optimize as opt
-from matplotlib import pyplot as plt
 from sympy.utilities.lambdify import lambdify
 from sympy import Matrix
+from scipy import optimize as opt
 
-#  initialize
 edge = np.genfromtxt('csv/adjacency.csv', delimiter=",").astype(np.int64)
 P = np.genfromtxt('csv/mdSpace.csv', delimiter=",")
 n = len(P)
-L = np.genfromtxt('csv/eigVals.csv', delimiter=",")
-L_pos = np.array([L[i] if L[i] > 0 else 0 for i in range(n)])
-d = np.count_nonzero(L_pos)  #d ... the number of positive values
+L =np.genfromtxt('csv/eigVals.csv', delimiter=",")
+L_pos = np.array([L[i] if L[i]>0 else 0 for i in range(n)])
+d = np.count_nonzero(L_pos)	# d ... the number of positive values
 Ln = np.sqrt(L_pos)
 
 f2 = np.array(Ln[0:d])
 f2[::2] = 0
 f1 = Ln[0:d] - f2
-e1 = f1 / np.linalg.norm(f1) ; e2 = f2 / np.linalg.norm(f2)
-temp1 = e1 ; temp2 = e2
+e1 = f1 / np.linalg.norm(f1)
+e2 = f2 / np.linalg.norm(f2)
 
-Xs = np.array([])
-Ys = np.array([])
-
-for i in np.arange(n):
-    p0 = P[i,0:d]
-    Xs = np.append(Xs,np.dot(p0,e1))
-    Ys = np.append(Ys,np.dot(p0,e2))
-
-########## sympy #################
 a1,b1,c1,a2,b2,c2,t,s = sp.symbols('a1 b1 c1 a2 b2 c2 t s')   # variables
 x2_s,y2_s = sp.symbols('x2_s y2_s') # values
 P_i = sp.MatrixSymbol('P_i', d, 1)
@@ -59,14 +48,20 @@ def lam(x2, y2, p, e_1, e_2):
 
 arr = np.array([1, 1, 1, 1, 1, 1, 1, 1])
 
-print(Xs[0])
+X_sample = 3 * np.random.random_sample((100, 1)) - 1.5
+Y_sample = 3 * np.random.random_sample((100, 1)) - 1.5
 
-f2 = lam(0,Ys[0],P[0],e1,e2)
-def g(args): return f2(*args)
+print("ready")
 
-res = opt.minimize(g, arr, method='L-BFGS-B')
-print(res)
-#e1 = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * P[0]
-#e2 = res.x[3] * temp1 + res.x[4] * temp2 + res.x[5] * P[0]
-#temp1 = e1
-#temp2 = e2
+import time
+start = time.time()
+
+for i in range(1):
+    f2 = lam(X_sample[i],Y_sample[i],P[0],e1,e2)
+    def g(args): return f2(*args)
+    f2(1,1,1,1,1,1,1,1)
+    # res = opt.minimize(g, arr, method='L-BFGS-B')
+    # print(res)
+
+elapsed_time = time.time() - start
+print("elapsed_time: " + str(elapsed_time) + "[sec]")
