@@ -16,17 +16,25 @@ Ln = np.sqrt(L_pos)
 f2 = np.array(Ln[0:d])
 f2[::2] = 0
 f1 = Ln[0:d] - f2
-e1 = f1 / np.linalg.norm(f1)
-e2 = f2 / np.linalg.norm(f2)
+e1 = (f1 / np.linalg.norm(f1)).reshape(d,1)
+e2 = (f2 / np.linalg.norm(f2)).reshape(d,1)
 temp1 = e1
 temp2 = e2
 
-Xs = np.array([])
-Ys = np.array([])
-for i in np.arange(n):
-    p0 = P[i,0:d]
-    Xs = np.append(Xs,np.dot(p0,e1))
-    Ys = np.append(Ys,np.dot(p0,e2))
+print(P[0].shape)
+print(type(P[0]))
+
+Xs = np.zeros(n)
+Ys = np.zeros(n)
+
+def update_points():
+	for i in np.arange(n):
+		global Xs, Ys
+		p0 = P[i, 0:d]
+		Xs[i] = np.dot(p0, e1)
+		Ys[i] = np.dot(p0, e2)
+
+update_points()
 
 print("init: ready")
 
@@ -53,11 +61,13 @@ f = Matrix([
 		sp.Matrix(P_i).dot(_E2) - y2_s
 		])
 
-lam_f = lambdify(var, f, 'numpy')
+func = sp.Matrix.norm(f)
+
+lam_f = lambdify(var, func, 'numpy')
 
 def lam(x2, y2, p, e_1, e_2):
     return lambda a1,b1,c1,a2,b2,c2,t,s: \
-        np.linalg.norm(lam_f(x2, y2, sp.Matrix(p), sp.Matrix(e_1), sp.Matrix(e_2), a1, b1, c1, a2, b2, c2, t, s))
+        lam_f(x2, y2, p, e_1, e_2, a1, b1, c1, a2, b2, c2, t, s)
 
 print("lambda: ready")
 
@@ -96,13 +106,24 @@ class DraggableCircle:
 		if self.press is None: return
 		if event.inaxes != self.circle.axes: return
 		if (self.circle.get_label() == identifier):
-			global e1, e2, Xs, Ys
-			f2 = lam(event.xdata, event.ydata, P[int(identifier)], e1, e2)
+			global e1, e2, temp1, temp2
+			f2 = lam(event.xdata, event.ydata, P[int(identifier)].reshape(d,1), e1, e2)
 			def g(args): return f2(*args)
 			res = opt.minimize(g, arr, method='L-BFGS-B')
 			print(res)
-			e1 = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * P[0]
-			e2 = res.x[3] * temp1 + res.x[4] * temp2 + res.x[5] * P[0]
+			e1 = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * P[int(identifier)].reshape(d,1)
+			e2 = res.x[3] * temp1 + res.x[4] * temp2 + res.x[5] * P[int(identifier)].reshape(d,1)
+			print(type(e1))
+			print(e1.shape)
+			temp1 = e1
+			temp2 = e2
+			update_points()
+			for i in np.arange(n):
+				nodes[i].center = (Xs[i], Ys[i])
+				nodes[i].figure.canvas.draw()
+			for i in range(len(edge)):
+				edges[i].set_xdata((Xs[edge[i,0] - 1], Xs[edge[i,1] - 1]))
+				edges[i].set_ydata((Ys[edge[i,0] - 1], Ys[edge[i,1] - 1]))
 			# print('x0=%f, xpress=%f, event.xdata=%f, dx=%f, x0+dx=%f' %
 			#      (x0, xpress, event.xdata, dx, x0+dx))
 			"""
