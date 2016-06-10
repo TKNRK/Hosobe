@@ -108,11 +108,11 @@ r = 10
 
 # 初期描画
 
-for i in range(n):
-	circles.append(w.create_oval(Xs_scaled[i] - r, Ys_scaled[i] - r, Xs_scaled[i] + r, Ys_scaled[i] + r, fill="White", tags='node'))
-
 for e in edge:
 	lines.append(w.create_line(Xs_scaled[e[0]-1], Ys_scaled[e[0]-1],Xs_scaled[e[1]-1], Ys_scaled[e[1]-1], fill='Black', tags='edge'))
+
+for i in range(n):
+	circles.append(w.create_oval(Xs_scaled[i] - r, Ys_scaled[i] - r, Xs_scaled[i] + r, Ys_scaled[i] + r, fill="White", tags='node'))
 
 # 移動
 def move_node(event):
@@ -121,7 +121,7 @@ def move_node(event):
     y = event.y
     x2 = unscale(int(x),True)
     y2 = unscale(y,False)
-    thisID = event.widget.find_withtag(CURRENT)[0] - 1
+    thisID = event.widget.find_withtag(CURRENT)[0] - (eN+1)
     f2 = lam(x2, y2, P[thisID].reshape(d, 1), e1, e2)
     def g(args): return f2(*args)
     res = opt.minimize(g, arr, method='L-BFGS-B')
@@ -135,7 +135,7 @@ def move_node(event):
         for i in range(n):
             w.coords(circles[i], Xs_scaled[i] - r, Ys_scaled[i] - r, Xs_scaled[i] + r, Ys_scaled[i] + r)
         for i in range(len(edge)):
-            w.coords((lines[i], Xs_scaled[edge[i][0]-1], Ys_scaled[edge[i][0]-1],Xs_scaled[edge[i][1]-1], Ys_scaled[edge[i][1]-1]))
+            w.coords(lines[i], Xs_scaled[edge[i][0]-1], Ys_scaled[edge[i][0]-1],Xs_scaled[edge[i][1]-1], Ys_scaled[edge[i][1]-1])
 
 # バインディング
 w.tag_bind('node', '<Button1-Motion>', move_node)
