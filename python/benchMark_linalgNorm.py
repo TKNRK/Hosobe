@@ -40,7 +40,7 @@ f = Matrix([
 		sp.Matrix(P_i).dot(_E2) - y2_s
 		])
 
-lam_f = lambdify(var, f, 'numpy')
+lam_f = lambdify(var, sp.simplify(f), 'numpy')
 
 def lam(x2, y2, p, e_1, e_2):
     return lambda a1,b1,c1,a2,b2,c2,t,s: \
@@ -57,11 +57,14 @@ import time
 start = time.time()
 
 for i in range(1):
-    f2 = lam(X_sample[i],Y_sample[i],P[0],e1,e2)
+    global e1, e2
+    temp1 = e1
+    temp2 = e2
+    f2 = lam(0,0,P[14],e1,e2)
     def g(args): return f2(*args)
-    f2(1,1,1,1,1,1,1,1)
-    # res = opt.minimize(g, arr, method='L-BFGS-B')
-    # print(res)
+    res = opt.minimize(g, arr, method='L-BFGS-B')
+    e1 = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * P[14].reshape(d, 1)
+    e2 = res.x[3] * temp1 + res.x[4] * temp2 + res.x[5] * P[14].reshape(d, 1)
 
 elapsed_time = time.time() - start
 print("elapsed_time: " + str(elapsed_time) + "[sec]")
