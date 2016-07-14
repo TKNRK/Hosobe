@@ -44,7 +44,8 @@ lam_f = lambdify(var, sp.simplify(f), 'numpy')
 
 def lam(x2, y2, p, e_1, e_2):
     return lambda a1,b1,c1,a2,b2,c2,t,s: \
-        np.linalg.norm(lam_f(x2, y2, sp.Matrix(p), sp.Matrix(e_1), sp.Matrix(e_2), a1, b1, c1, a2, b2, c2, t, s))
+        ((lam_f(x2, y2, sp.Matrix(p), sp.Matrix(e_1), sp.Matrix(e_2), a1, b1, c1, a2, b2, c2, t, s)) ** 2).sum()
+         # np.linalg.norm(~) よりも高速。（速いとは言ってない）
 
 arr = np.array([1, 1, 1, 1, 1, 1, 1, 1])
 

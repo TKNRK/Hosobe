@@ -1,6 +1,6 @@
 import numpy as np
 import sympy as sp
-from sympy.utilities.lambdify import lambdify
+from sympy.utilities.lambdify import lambdify, lambdastr
 from sympy import Matrix
 from scipy import optimize as opt
 
@@ -43,9 +43,14 @@ f = Matrix([
 		sp.Matrix(P_i).dot(_E2) - y2_s
 		])
 
+[e * e for e in [e1, e2, e3]]
+
 func = sp.simplify(sp.Matrix.norm(f))
 
 lam_f = lambdify(var, func, 'numpy')
+print(lambdastr(var, func))
+print(lambdastr(var, _E1))
+print(lambdastr(var,_E1.dot(_E1)))
 
 def lam(x2, y2, p, e_1, e_2):
     return lambda a1,b1,c1,a2,b2,c2,t,s: \
@@ -54,11 +59,11 @@ def lam(x2, y2, p, e_1, e_2):
 arr = np.array([1, 1, 1, 1, 1, 1, 1, 1])
 print("lambda: ready")
 
-X_sample = 3 * np.random.random_sample((100, 1)) - 1.5
-Y_sample = 3 * np.random.random_sample((100, 1)) - 1.5
+#X_sample = 3 * np.random.random_sample((100, 1)) - 1.5
+#Y_sample = 3 * np.random.random_sample((100, 1)) - 1.5
 
 print("ready")
-
+"""
 import time
 start = time.time()
 
@@ -66,12 +71,14 @@ for i in range(100):
     global e1, e2
     temp1 = e1.reshape(d,1)
     temp2 = e2.reshape(d,1)
-    f2 = lam(X_sample[i], Y_sample[i], P[14].reshape(d, 1), temp1, temp2)
+    f2 = lam(0, 0, P[14].reshape(d, 1), temp1, temp2)
     def g(args): return f2(*args)
-    res = opt.minimize(g, arr, method='L-BFGS-B')
+    res = opt.minimize(g, arr, method='L-BFGS-B',options={'ftol':1e-5})
+    if i == 0: print(res)
     if (res.success):
         e1 = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * P[14].reshape(d, 1)
         e2 = res.x[3] * temp1 + res.x[4] * temp2 + res.x[5] * P[14].reshape(d, 1)
 
 elapsed_time = time.time() - start
 print("elapsed_time: " + str(elapsed_time) + "[sec]")
+"""

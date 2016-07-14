@@ -1,14 +1,17 @@
 from sympy import *
 from functools import *
+from sympy.matrices.expressions.matmul import remove_ids
 
-l = Symbol('l')
+#l = Symbol('l')
+l = 5
 T = MatrixSymbol('T', l, l)
-M = MatrixSymbol('M', l, l)
-tM = T * M
+M = MatrixSymbol('M', l, l) # M = [[e1],[e2],[e3],0]
+tM = M * T
 
-facts = Q.orthogonal(M) and Q.real_elements(T)
+facts = Q.orthogonal(M)
 
-t2M2 = refine(tM * tM.T, facts)
+t2M2 = remove_ids(refine(tM.T * tM, facts))
+
 print(t2M2)
 """
 a = Symbol('a',real=True)

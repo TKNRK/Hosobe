@@ -1,8 +1,6 @@
 import numpy as np
 
-class rot_3D:
-    """Rotation"""
-
+class rot_3D(object):
     a = np.array([1, 1, 1])
     b = np.array([1, 1, 1])
 
@@ -12,7 +10,6 @@ class rot_3D:
 
     def norm(k):
         np.linalg.norm(k)
-
 
     a_x = a_y = a_z = a
     b_x = b_y = b_z = b
@@ -49,4 +46,5 @@ class rot_3D:
         [0,0,1]])
 
 
-    def rotation(self,P): (self.rot_x * self.rot_y * self.rot_z * P.T).T
+    def rotation(self,P):
+        (self.rot_x * self.rot_y * self.rot_z * P.T).T
