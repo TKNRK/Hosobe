@@ -41,7 +41,7 @@ def update_points():
 
 update_points()
 
-print("init: ready")
+print("init")
 print(Xs[14],Ys[14],Zs[14])
 
 identifier = "14"
@@ -65,6 +65,8 @@ _E3 = sp.Matrix(a3 * E1 + b3 * E2 + c3 * E3 + d3 * E0)
 R1 = sp.Matrix(t1 * E1 + s1 * E2 + u1 * E3)
 R2 = sp.Matrix(t2 * E1 + s2 * E2 + u2 * E3)
 
+print("Variable declaration finished.")
+
 _f = Matrix([
 	_E1.dot(_E1) - 1,
 	_E2.dot(_E2) - 1,
@@ -86,30 +88,34 @@ _f = Matrix([
 	sp.Matrix(P_i).dot(_E3) - z2_s
 ])
 
-#sp.refine(_f,sp.Q.zero(Matrix(E1).dot(Matrix(E1))))
-
 _func = sp.Matrix.norm(_f)
+
+print("culcurated the norm")
 
 _lam_f = lambdify(_var, _func, 'numpy')
 
+print("lambdify ends.")
 
 def _lam(x2, y2, z2, p, e_1, e_2, e_3):
 	return lambda a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t1, s1, u1, t2, s2, u2: \
 		_lam_f(x2, y2, z2, p, e_1, e_2, e_3, a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t1, s1, u1, t2, s2, u2)
 
-print("end")
-
 ons = np.ones(18)
 _arr = np.array(ons)
+
+print("lambda : ready")
 
 _f2 = _lam(0, 0, 0, P[int(identifier)].reshape(d, 1), e1, e2, e3)
 
 def _g(args): return _f2(*args)
 
 res = opt.minimize(_g, _arr, method='L-BFGS-B',options={'ftol':1e-3})
-print(res)
-e1 = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * temp3 + res.x[3] * P[int(identifier)].reshape(d, 1)
-e2 = res.x[4] * temp1 + res.x[5] * temp2 + res.x[6] * temp3 + res.x[7] * P[int(identifier)].reshape(d, 1)
-e3 = res.x[8] * temp1 + res.x[9] * temp2 + res.x[10] * temp3 + res.x[11] * P[int(identifier)].reshape(d, 1)
+
+print(res.x)
+
+p14 = P[14].reshape(d,1) / np.linalg.norm(P[14])
+e1 = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * temp3 + res.x[3] * p14
+e2 = res.x[4] * temp1 + res.x[5] * temp2 + res.x[6] * temp3 + res.x[7] * p14
+e3 = res.x[8] * temp1 + res.x[9] * temp2 + res.x[10] * temp3 + res.x[11] * p14
 update_points()
 print(Xs[14], Ys[14], Zs[14])

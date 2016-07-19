@@ -101,7 +101,7 @@ arr_init = np.zeros(high_dim * high_dim).reshape(high_dim, high_dim)
 def arr_initializer(a,b):
     print(type(a), a.shape, a)
     arr_init[0:dim+1,0:dim] = a		# E' variables ( E'[0] = this[0:dim+1,0] * (E:E0) )
-    arr_init[0:dim,dim:2*dim] = b	# R  variables ( ignore )
+    arr_init[0:dim,dim:2*dim-1] = b	# R  variables ( ignore )
     return f2(arr_init)
 
 """
@@ -124,8 +124,8 @@ res = opt.minimize(g, init, method='L-BFGS-B',options={'ftol':1e-3})
 print(res)
 p_i = P[14] / np.linalg.norm(P[14])
 if(res.success):
-    Es[0] = res.x[0] * temp1 + res.x[2] * temp2 + res.x[4] * p_i
-    Es[1] = res.x[1] * temp1 + res.x[3] * temp2 + res.x[5] * p_i
+    Es[0] = res.x[0] * temp1 + res.x[3] * temp2 + res.x[6] * p_i
+    Es[1] = res.x[1] * temp1 + res.x[4] * temp2 + res.x[7] * p_i
     update_points()
     print(Xs[14])
     print(Ys[14])

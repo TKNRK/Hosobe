@@ -59,22 +59,25 @@ update_points()
 print("init: ready")
 
 # sympy
-a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t, s, u = sp.symbols(
-	'a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 t s u')  # variables
+a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t1, s1, u1, t2, s2, u2 = sp.symbols(
+	'a1 b1 c1 d1 a2 b2 c2 d2 a3 b3 c3 d3 t1 s1 u1 t2 s2 u2')  # variables
 x2_s, y2_s, z2_s = sp.symbols('x2_s y2_s z2_s')  # values
 P_i = sp.MatrixSymbol('P_i', high_dim, 1)
 E1 = sp.MatrixSymbol('E1', high_dim, 1)
 E2 = sp.MatrixSymbol('E2', high_dim, 1)
 E3 = sp.MatrixSymbol('E3', high_dim, 1)
-_var = (x2_s, y2_s, z2_s, P_i, E1, E2, E3, a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t, s, u)
+_var = (x2_s, y2_s, z2_s, P_i, E1, E2, E3, a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t1, s1, u1, t2, s2, u2)
 
 E0 = sp.Matrix(P_i - x2_s * E1 - y2_s * E2 - z2_s * E3)
 E0 = sp.simplify(E0 / sp.Matrix.norm(E0))
 
-_E1 = sp.Matrix(a1 * E1 + b1 * E2 + c1 * E3 + d1 * P_i)
-_E2 = sp.Matrix(a2 * E1 + b2 * E2 + c2 * E3 + d2 * P_i)
-_E3 = sp.Matrix(a3 * E1 + b3 * E2 + c3 * E3 + d3 * P_i)
-R = sp.Matrix(t * E1 + s * E2 + u * E3)
+_E1 = sp.Matrix(a1 * E1 + b1 * E2 + c1 * E3 + d1 * E0)
+_E2 = sp.Matrix(a2 * E1 + b2 * E2 + c2 * E3 + d2 * E0)
+_E3 = sp.Matrix(a3 * E1 + b3 * E2 + c3 * E3 + d3 * E0)
+R1 = sp.Matrix(t1 * E1 + s1 * E2 + u1 * E3)
+R2 = sp.Matrix(t2 * E1 + s2 * E2 + u2 * E3)
+
+print("Variable declaration finished.")
 
 _f = Matrix([
 	_E1.dot(_E1) - 1,
@@ -83,10 +86,15 @@ _f = Matrix([
 	_E1.dot(_E2),
 	_E2.dot(_E3),
 	_E3.dot(_E1),
-	R.dot(R) - 1,
-	_E1.dot(R) - sp.Matrix(E1).dot(R),
-	_E2.dot(R) - sp.Matrix(E2).dot(R),
-	_E3.dot(R) - sp.Matrix(E3).dot(R),
+	R1.dot(R1) - 1,
+	R2.dot(R2) - 1,
+	R1.dot(R2),
+	_E1.dot(R1) - sp.Matrix(E1).dot(R1),
+	_E2.dot(R1) - sp.Matrix(E2).dot(R1),
+	_E3.dot(R1) - sp.Matrix(E3).dot(R1),
+	_E1.dot(R2) - sp.Matrix(E1).dot(R2),
+	_E2.dot(R2) - sp.Matrix(E2).dot(R2),
+	_E3.dot(R2) - sp.Matrix(E3).dot(R2),
 	sp.Matrix(P_i).dot(_E1) - x2_s,
 	sp.Matrix(P_i).dot(_E2) - y2_s,
 	sp.Matrix(P_i).dot(_E3) - z2_s
@@ -94,15 +102,20 @@ _f = Matrix([
 
 _func = sp.Matrix.norm(_f)
 
+print("culcurated the norm")
+
 _lam_f = lambdify(_var, _func, 'numpy')
 
-def _lam(x2, y2, z2, p, e_1, e_2, e_3):
-	return lambda a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t, s, u: \
-		_lam_f(x2, y2, z2, p, e_1, e_2, e_3, a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t, s, u)
+print("lambdify ends.")
 
-ons = np.ones(15)
+def _lam(x2, y2, z2, p, e_1, e_2, e_3):
+	return lambda a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t1, s1, u1, t2, s2, u2: \
+		_lam_f(x2, y2, z2, p, e_1, e_2, e_3, a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, t1, s1, u1, t2, s2, u2)
+
+ons = np.ones(18)
 _arr = np.array(ons)
-print("lambda: ready")
+
+print("lambda : ready")
 
 ######## Graph Drawing ########
 root = Tk()
@@ -121,20 +134,21 @@ for i in range(node_num):
 # 移動
 def move_node(event):
     global E
-    temp1 = E[0]
-    temp2 = E[1]
-    temp3 = E[2]
     x2 = unscale(event.x,True)
     y2 = unscale(event.y,False)
     thisID = event.widget.find_withtag(CURRENT)[0] - (edge_num+1)
-    _f2 = _lam(0, 0, 0, P[int(thisID)].reshape(high_dim, 1), E[0].reshape(high_dim, 1),E[1].reshape(high_dim, 1),E[2].reshape(high_dim, 1))
-    def _g(args):
-        return _f2(*args)
-    res = opt.minimize(_g, _arr, method='L-BFGS-B', options={'ftol': 1e-3})
+    _f2 = _lam(x2, y2, Zs[thisID], P[int(thisID)].reshape(high_dim, 1), E[0].reshape(high_dim, 1),E[1].reshape(high_dim, 1),E[2].reshape(high_dim, 1))
+    def _g(args): return _f2(*args)
+    res = opt.minimize(_g, _arr, method='L-BFGS-B', options={'ftol': 1e-2})
     if(res.success):
-        E[0] = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * temp3 + res.x[3] * P[thisID]
-        E[1] = res.x[4] * temp1 + res.x[5] * temp2 + res.x[6] * temp3 + res.x[7] * P[thisID]
-        E[2] = res.x[8] * temp1 + res.x[9] * temp2 + res.x[10] * temp3 + res.x[11] * P[thisID]
+        temp1 = E[0]
+        temp2 = E[1]
+        temp3 = E[2]
+        e0 = P[thisID] - x2 * temp1 - y2 * temp2 - Zs[thisID] * temp3
+        e0 = e0 / np.linalg.norm(e0)
+        E[0] = res.x[0] * temp1 + res.x[1] * temp2 + res.x[2] * temp3 + res.x[3] * e0
+        E[1] = res.x[4] * temp1 + res.x[5] * temp2 + res.x[6] * temp3 + res.x[7] * e0
+        E[2] = res.x[8] * temp1 + res.x[9] * temp2 + res.x[10] * temp3 + res.x[11] * e0
         update_points()
         for i in range(node_num):
             w.coords(circles[i], Xs_scaled[i] - r, Ys_scaled[i] - r, Xs_scaled[i] + r, Ys_scaled[i] + r)
