@@ -36,18 +36,18 @@ Xs = np.zeros(node_num)
 Ys = np.zeros(node_num)
 Xs_scaled = np.zeros(node_num)
 Ys_scaled = np.zeros(node_num)
-boundingX = 0
-boundingY = 0
+boundingH = 0
+boundingV = 0
 
 def scale(pnt,bool):
-	if(bool): return wid*(pnt + boundingX/2)/boundingX + (_wid - wid)/2
-	else: return (hei-100)*(boundingY/2 - pnt)/boundingY + (_hei - hei)/2
+	if(bool): return wid*(pnt + boundingH / 2) / boundingH + (_wid - wid) / 2
+	else: return (hei-100)*(boundingV / 2 - pnt) / boundingV + (_hei - hei) / 2
 def unscale(pnt,bool):
-	if (bool): return boundingX * ((pnt - (_wid - wid)/2) - wid / 2) / wid
-	else: return boundingY * ((pnt - (_hei - hei)/2) - (hei - 100) / 2) / (100 - hei)
+	if (bool): return boundingH * ((pnt - (_wid - wid) / 2) - wid / 2) / wid
+	else: return boundingV * ((pnt - (_hei - hei) / 2) - (hei - 100) / 2) / (100 - hei)
 def update_points():
 	for i in range(node_num):
-		global Xs, Ys, boundingX, boundingY
+		global Xs, Ys, boundingH, boundingV
 		p0 = P[i, 0:high_dim]
 		Xs[i] = np.dot(p0, Es[0]) ; Ys[i] = np.dot(p0, Es[1])
 	boundingX = max([np.amax(Xs), np.amin(Xs)]) * 2

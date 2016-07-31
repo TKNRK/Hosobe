@@ -18,12 +18,16 @@ sampleE[:,2] = e0
 EE = sampleE[:,0:2].T
 
 # sympy
-A = MatrixSymbol('A',12,12)	# coefficient matrix : Aのi列目が ei' の係数
-xs = MatrixSymbol('xs', 1, 12)  # updated point
+#A = MatrixSymbol('A',12,12)	# coefficient matrix : Aのi列目が ei' の係数
+A_inputEs = MatrixSymbol('A_inputEs', 3, 2)
+A_inputRs = MatrixSymbol('A_inputRs', 2, 1)
 q = MatrixSymbol('q',1,2)
 p_i = MatrixSymbol('p_i', 1, 12)  # updated point
 E = MatrixSymbol('E', 12,12) # = (e1 e2 e0 P[thisID] 0 ...) : 縦ベクトルの列
-var = (q,p_i,E,A)
+var = (q,p_i,E,A_inputEs,A_inputRs)
+A = Matrix(np.zeros(144).reshape(12,12))
+A[0:3,0:2] = Matrix(A_inputEs)
+A[0:2,0:1] = Matrix(A_inputRs)
 
 _E = E * A  # = (e1' e2' R1 0 ...) : 縦ベクトルの列
 
@@ -51,7 +55,9 @@ _pew = pew[0,1]**2 + pew[0,0]**2
 f = Matrix([_bases_e,_bases_r,_eMulR,_pew])
 
 func = sum(f)
-lam_f = lambdify(var, func, 'numpy')
+lam_f2 = lambdify(var, func, 'numpy')
+def lam_f(*args):
+    return lam_f2(*args)
 #print(lambdastr(lam_f))
 
 def lam(q_, Esub, P_i):
@@ -66,33 +72,19 @@ def lam(q_, Esub, P_i):
     E_ = np.zeros(12*12).reshape(12,12)
     partOfE_ = np.r_[Esub,E0]
     E_[0:3,0:12] = partOfE_
-    return lambda A_: lam_f(q_, P_i, E_, A_)
-
-
-arr_init = np.zeros(144).reshape(12,12)
-
-def arr_initializer(a,b):
-    arr_init[0:3,0:2] = a		# E' variables ( E'[0] = this[0:dim+1,0] * (E:E0) )
-    arr_init[0:2,2:3] = b	# R  variables ( ignore )
-    return f2(arr_init)
-
-init = np.array([1,0,0,0,1,0,1,1])
+    return lambda A_E, A_R: lam_f(q_, P_i, E_.T, A_E, A_R)
 
 f2 = lam(point, EE, p00)
+
+init = np.array([1,0,0,0,1,0,1,1])
 
 def g(args):
 	arg1 = args[0:6].reshape(3,2)
 	arg2 = args[6:8].reshape(2,1)
-	return arr_initializer(arg1,arg2)
+	return f2(arg1,arg2)
 
 print("lambda: ready")
 
 
-#print(point)
-#print(p00)
-#print(e0)
-#print(sampleE)
-#print(sampleA)
-print(lam_f(point, p00, sampleE, sampleA))
-#print("aetrhg")
+print(lam_f(point, p00, sampleE, sampleA[0:3,0:2], sampleA[0:2,0:1]))
 print(g(np.array([1,1,1,1,1,1,1,1])))
