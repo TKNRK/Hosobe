@@ -69,6 +69,17 @@ _E2 = sp.Matrix(a2*E1 + b2*E2 + c2*P_i)
 R = sp.Matrix(s*E1 + t*E2)
 
 f = Matrix([
+		_E1.T * _E1 - Matrix([1]),
+		_E2.T * _E2 - Matrix([1]),
+		_E1.T * _E2,
+		R.T * R - Matrix([1]),
+		_E1.T * R - sp.Matrix(E1).T * R,
+		_E2.T * R - sp.Matrix(E2).T * R,
+		sp.Matrix(P_i).T * (_E1) - Matrix([x2_s]),
+		sp.Matrix(P_i).T * (_E2) - Matrix([y2_s])
+		])
+"""
+f = Matrix([
 		_E1.dot(_E1) - 1,
 		_E2.dot(_E2) - 1,
 		_E1.dot(_E2),
@@ -78,7 +89,7 @@ f = Matrix([
 		sp.Matrix(P_i).dot(_E1) - x2_s,
 		sp.Matrix(P_i).dot(_E2) - y2_s
 		])
-
+"""
 func = sp.Matrix.norm(f)
 lam_f = lambdify(var, func, 'numpy')
 
