@@ -11,7 +11,7 @@ _wid = _hei = 700  # window's width and height
 wid = hei = 500  # canvas's width and height
 
 # load adjacency and multi-dimensional space
-edge = np.genfromtxt('csv/adjacency.csv', delimiter=",").astype(np.int64)
+edge = np.genfromtxt('csv/edgeList.csv', delimiter=",").astype(np.int64)
 edge_num = len(edge)
 P = np.genfromtxt('csv/mdSpace.csv', delimiter=",")
 node_num, high_dim = P.shape
@@ -47,8 +47,8 @@ def update_points():
 		global Xs, Ys, boundingH, boundingV
 		p0 = P[i, 0:high_dim]
 		Xs[i] = np.dot(p0, E[0]) ; Ys[i] = np.dot(p0, E[1])
-	boundingX = max([np.amax(Xs), np.amin(Xs)]) * 2
-	boundingY = max([np.amax(Ys), np.amin(Ys)]) * 2
+	boundingH = max([np.amax(Xs), np.amin(Xs)]) * 2
+	boundingV = max([np.amax(Ys), np.amin(Ys)]) * 2
 	for i in range(node_num):
 		Xs_scaled[i] = scale(Xs[i], True);Ys_scaled[i] = scale(Ys[i], False)
 

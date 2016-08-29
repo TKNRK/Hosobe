@@ -2,19 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0354fe11-af03-4286-b82f-e4cadbbc8d27" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/jupyter/csv/adjacency.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/jupyter/csv/adjacency2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/jupyter/csv/dist.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/python/csv/adjacency.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/python/csv/adjacency2.csv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/python/csv/dist.csv" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Hosobe.iml" afterPath="$PROJECT_DIR$/.idea/Hosobe.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/3D_constraints.ipynb" afterPath="$PROJECT_DIR$/jupyter/3D_constraints.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/agiPy.ipynb" afterPath="$PROJECT_DIR$/jupyter/agiPy.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/csv/eigVals2.csv" afterPath="$PROJECT_DIR$/jupyter/csv/eigVals2.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/csv/mdSpace2.csv" afterPath="$PROJECT_DIR$/jupyter/csv/mdSpace2.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/agi.py" afterPath="$PROJECT_DIR$/python/agi.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/agiE0.py" afterPath="$PROJECT_DIR$/python/agiE0.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/agiTest.py" afterPath="$PROJECT_DIR$/python/agiTest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/agi_refine.py" afterPath="$PROJECT_DIR$/python/agi_refine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/constraints_matval.py" afterPath="$PROJECT_DIR$/python/constraints_matval.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/constraints_matval2D.py" afterPath="$PROJECT_DIR$/python/constraints_matval2D.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/conversion.py" afterPath="$PROJECT_DIR$/python/conversion.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/csv/eigVals2.csv" afterPath="$PROJECT_DIR$/python/csv/eigVals2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/csv/mdSpace2.csv" afterPath="$PROJECT_DIR$/python/csv/mdSpace2.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/csv/.Rapp.history" afterPath="$PROJECT_DIR$/python/csv/.Rapp.history" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/資料/rCommand.txt" afterPath="$PROJECT_DIR$/資料/rCommand.txt" />
     </list>
     <ignored path="Hosobe.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,14 +37,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="agi3D.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/python/agi3D.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2346">
+              <caret line="138" column="23" selection-start-line="138" selection-start-column="23" selection-end-line="138" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="agi.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/python/agi.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="agiE0.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/python/agiE0.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1887">
-              <caret line="151" column="22" selection-start-line="151" selection-start-column="22" selection-end-line="151" selection-end-column="22" />
+            <state relative-caret-position="17">
+              <caret line="47" column="7" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#4949#5313#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -83,8 +104,9 @@
         <option value="$PROJECT_DIR$/python/memo.py" />
         <option value="$PROJECT_DIR$/python/constraints_matval.py" />
         <option value="$PROJECT_DIR$/python/conversion.py" />
-        <option value="$PROJECT_DIR$/python/agi.py" />
         <option value="$PROJECT_DIR$/python/constraints_matval2D.py" />
+        <option value="$PROJECT_DIR$/python/agi3D.py" />
+        <option value="$PROJECT_DIR$/python/agi.py" />
         <option value="$PROJECT_DIR$/python/agiE0.py" />
       </list>
     </option>
@@ -131,7 +153,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -185,6 +206,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -202,23 +224,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.agiE0">
-    <configuration default="false" name="constraints_matval" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Hosobe" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/constraints_matval.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="constraints_matval2D" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -283,6 +288,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Hosobe" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/agiE0.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="agi3D" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Hosobe" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/agi3D.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -425,19 +447,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.constraints_matval" />
-      <item index="1" class="java.lang.String" itemvalue="Python.constraints_matval2D" />
-      <item index="2" class="java.lang.String" itemvalue="Python.conversion" />
-      <item index="3" class="java.lang.String" itemvalue="Python.agi" />
-      <item index="4" class="java.lang.String" itemvalue="Python.agiE0" />
+      <item index="0" class="java.lang.String" itemvalue="Python.constraints_matval2D" />
+      <item index="1" class="java.lang.String" itemvalue="Python.conversion" />
+      <item index="2" class="java.lang.String" itemvalue="Python.agi" />
+      <item index="3" class="java.lang.String" itemvalue="Python.agiE0" />
+      <item index="4" class="java.lang.String" itemvalue="Python.agi3D" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.agiE0" />
-        <item index="1" class="java.lang.String" itemvalue="Python.constraints_matval2D" />
-        <item index="2" class="java.lang.String" itemvalue="Python.agi" />
-        <item index="3" class="java.lang.String" itemvalue="Python.conversion" />
-        <item index="4" class="java.lang.String" itemvalue="Python.constraints_matval" />
+        <item index="1" class="java.lang.String" itemvalue="Python.agi" />
+        <item index="2" class="java.lang.String" itemvalue="Python.agi3D" />
+        <item index="3" class="java.lang.String" itemvalue="Python.constraints_matval2D" />
+        <item index="4" class="java.lang.String" itemvalue="Python.conversion" />
       </list>
     </recent_temporary>
   </component>
@@ -461,23 +483,23 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08052709" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16837482" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3223954" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26498422" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20189275" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4052502" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2647541" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4052502" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -517,13 +539,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/python/agiTest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python/agi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1755">
@@ -604,13 +619,7 @@
     <entry file="file://$PROJECT_DIR$/agiPyMemo.ipynb" />
     <entry file="file://$PROJECT_DIR$/benchMark_lambdify.py" />
     <entry file="file://$PROJECT_DIR$/benchMark.ipynb" />
-    <entry file="file://$PROJECT_DIR$/python/csv/dist.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/python/csv/dist.csv" />
     <entry file="file://$PROJECT_DIR$/python/hosobe.py" />
     <entry file="file://$PROJECT_DIR$/jupyter/lamVec.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
@@ -662,13 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/agi_refine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python/refine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -702,13 +704,6 @@
     </entry>
     <entry file="file:///anaconda/envs/vis/lib/python3.5/site-packages/scipy/optimize/lbfgsb.py" />
     <entry file="file:///anaconda/envs/vis/lib/python3.5/site-packages/scipy/optimize/optimize.py" />
-    <entry file="file://$PROJECT_DIR$/python/agi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="106" column="21" selection-start-line="106" selection-start-column="21" selection-end-line="106" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python/conversion.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="488">
@@ -723,13 +718,35 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/python/agi_refine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/agi3D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2346">
+          <caret line="138" column="23" selection-start-line="138" selection-start-column="23" selection-end-line="138" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/agi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/python/agiE0.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1887">
-          <caret line="151" column="22" selection-start-line="151" selection-start-column="22" selection-end-line="151" selection-end-column="22" />
+        <state relative-caret-position="17">
+          <caret line="47" column="7" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#4949#5313#0" expanded="false" />
           </folding>
         </state>
       </provider>
