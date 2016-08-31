@@ -2,22 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0354fe11-af03-4286-b82f-e4cadbbc8d27" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jupyter/csv/adjacency.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jupyter/csv/adjacency2.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jupyter/csv/dist.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/python/csv/adjacency.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/python/csv/adjacency2.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/python/csv/dist.csv" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Hosobe.iml" afterPath="$PROJECT_DIR$/.idea/Hosobe.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/python/agi_refine.py" afterPath="$PROJECT_DIR$/python/agi2D.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/AGI3D.ipynb" afterPath="$PROJECT_DIR$/jupyter/AGI3D.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/csv/edgeList.csv" afterPath="$PROJECT_DIR$/jupyter/csv/edgeList.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/csv/edgeList2.csv" afterPath="$PROJECT_DIR$/jupyter/csv/edgeList2.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/csv/eigVals.csv" afterPath="$PROJECT_DIR$/jupyter/csv/eigVals.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/csv/eigVals2.csv" afterPath="$PROJECT_DIR$/jupyter/csv/eigVals2.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/csv/mdSpace.csv" afterPath="$PROJECT_DIR$/jupyter/csv/mdSpace.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jupyter/csv/mdSpace2.csv" afterPath="$PROJECT_DIR$/jupyter/csv/mdSpace2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/agi.py" afterPath="$PROJECT_DIR$/python/agi.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/agiE0.py" afterPath="$PROJECT_DIR$/python/agiE0.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/csv/.Rapp.history" afterPath="$PROJECT_DIR$/python/csv/.Rapp.history" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/csv/edgeList.csv" afterPath="$PROJECT_DIR$/python/csv/edgeList.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/csv/edgeList2.csv" afterPath="$PROJECT_DIR$/python/csv/edgeList2.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/csv/eigVals.csv" afterPath="$PROJECT_DIR$/python/csv/eigVals.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/csv/mdSpace.csv" afterPath="$PROJECT_DIR$/python/csv/mdSpace.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scala/csv/adjacency.csv" afterPath="$PROJECT_DIR$/scala/csv/adjacency.csv" />
@@ -51,41 +44,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="agi3D.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python/agi3D.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2010">
-              <caret line="138" column="23" selection-start-line="138" selection-start-column="23" selection-end-line="138" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="agi.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="agi.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/python/agi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-435">
-              <caret line="51" column="29" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
+            <state relative-caret-position="210">
+              <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="agiTest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python/agiTest.py">
+      <file leaf-file-name="agi2D.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/python/agi2D.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="agiE0.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/python/agiE0.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-450">
-              <caret line="32" column="52" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
+            <state relative-caret-position="698">
+              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -132,13 +105,14 @@
         <option value="$PROJECT_DIR$/python/agi3D.py" />
         <option value="$PROJECT_DIR$/python/agiE0.py" />
         <option value="$PROJECT_DIR$/python/agi.py" />
+        <option value="$PROJECT_DIR$/python/agi2D.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1391" />
+    <option name="x" value="101" />
     <option name="y" value="23" />
-    <option name="width" value="1103" />
+    <option name="width" value="1182" />
     <option name="height" value="1337" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -177,8 +151,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -247,7 +221,7 @@
       <recent name="C:\Users\Riku\Dropbox (smartnova)\Hosobe\python" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.agi">
+  <component name="RunManager" selected="Python.agi2D">
     <configuration default="false" name="constraints_matval2D" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -261,23 +235,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Hosobe" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/constraints_matval2D.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="conversion" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Hosobe" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/conversion.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -329,6 +286,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Hosobe" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/agi3D.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="agi2D" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Hosobe" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python/agi2D.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -472,18 +446,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.constraints_matval2D" />
-      <item index="1" class="java.lang.String" itemvalue="Python.conversion" />
-      <item index="2" class="java.lang.String" itemvalue="Python.agi" />
-      <item index="3" class="java.lang.String" itemvalue="Python.agiE0" />
-      <item index="4" class="java.lang.String" itemvalue="Python.agi3D" />
+      <item index="1" class="java.lang.String" itemvalue="Python.agi" />
+      <item index="2" class="java.lang.String" itemvalue="Python.agiE0" />
+      <item index="3" class="java.lang.String" itemvalue="Python.agi3D" />
+      <item index="4" class="java.lang.String" itemvalue="Python.agi2D" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.agi" />
-        <item index="1" class="java.lang.String" itemvalue="Python.agiE0" />
-        <item index="2" class="java.lang.String" itemvalue="Python.agi3D" />
-        <item index="3" class="java.lang.String" itemvalue="Python.constraints_matval2D" />
-        <item index="4" class="java.lang.String" itemvalue="Python.conversion" />
+        <item index="0" class="java.lang.String" itemvalue="Python.agi2D" />
+        <item index="1" class="java.lang.String" itemvalue="Python.agi" />
+        <item index="2" class="java.lang.String" itemvalue="Python.agiE0" />
+        <item index="3" class="java.lang.String" itemvalue="Python.agi3D" />
+        <item index="4" class="java.lang.String" itemvalue="Python.constraints_matval2D" />
       </list>
     </recent_temporary>
   </component>
@@ -504,10 +478,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1391" y="23" width="1103" height="1337" extended-state="0" />
+    <frame x="101" y="23" width="1182" height="1337" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2116451" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19724375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3223954" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -516,7 +490,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20189275" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4052502" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4045864" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -735,13 +709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/agi_refine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/python/agi3D.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2010">
@@ -750,29 +717,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/agiE0.py">
+    <entry file="file://$PROJECT_DIR$/python/agiTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-450">
-          <caret line="32" column="52" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1635">
+          <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/python/agiTest.py">
+    <entry file="file://$PROJECT_DIR$/python/agiE0.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="115" column="17" selection-start-line="115" selection-start-column="17" selection-end-line="115" selection-end-column="17" />
+        <state relative-caret-position="-615">
+          <caret line="32" column="52" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/python/agi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-435">
-          <caret line="51" column="29" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
+        <state relative-caret-position="210">
+          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/python/agi2D.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="698">
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
