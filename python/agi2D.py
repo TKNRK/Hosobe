@@ -85,12 +85,10 @@ print(f1)
 
 substitution = [(_E1, F1), (_E2, F2), (_R, R)]
 
-#f = Matrix(f1 + f2 + f3)
-f = Matrix(f1.subs(substitution))
+f = f1 + f2 + f3
+func = Matrix(f.subs(substitution))
 #f = f.subs(_E2, F2)
 #f.subs(_R, R)
-
-func = f
 lam_f = lambdify(var, func, 'numpy')
 print(lambdastr(var,func))
 
